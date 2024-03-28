@@ -132,9 +132,9 @@ if(isset($_POST['add_to_cart'])){
 
       <div class="box">
          <img src="images/cat-3.png" alt="">
-         <h3>vegitables</h3>
+         <h3>vegetables</h3>
          <p>From leafy greens to colorful roots, vegetables bring vibrant flavor and essential nutrients to every dish!.</p>
-         <a href="category.php?category=vegitables" class="btn">vegitables</a>
+         <a href="category.php?category=vegitables" class="btn">vegetables</a>
       </div>
 
       <div class="box">
@@ -165,11 +165,15 @@ if(isset($_POST['add_to_cart'])){
       <a href="view_page.php?pid=<?= $fetch_products['id']; ?>" class="fas fa-eye"></a>
       <img src="uploaded_img/<?= $fetch_products['image']; ?>" alt="">
       <div class="name"><?= $fetch_products['name']; ?></div>
+      <div class="form-item">
+         <label class="form-label" for="quantity">available in stock</label>
+         <span><?= $fetch_products['quantity'] ?></span>
+      </div>
       <input type="hidden" name="pid" value="<?= $fetch_products['id']; ?>">
       <input type="hidden" name="p_name" value="<?= $fetch_products['name']; ?>">
       <input type="hidden" name="p_price" value="<?= $fetch_products['price']; ?>">
       <input type="hidden" name="p_image" value="<?= $fetch_products['image']; ?>">
-      <input type="number" min="1" value="1" name="p_qty" class="qty">
+      <input type="number" min="1" value="1" max=<?= $fetch_products['quantity'] ?> name="p_qty" class="qty">
       <input type="submit" value="add to wishlist" class="option-btn" name="add_to_wishlist">
       <input type="submit" value="add to cart" class="btn" name="add_to_cart">
    </form>

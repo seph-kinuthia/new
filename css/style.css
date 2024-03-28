@@ -1,5 +1,9 @@
 @import url('components.css');
 
+.form-label {
+   font-size: 16px;
+}
+
 .home-bg{
    background: url(../images/home-bg.jpg) no-repeat;
    background-size: cover;
