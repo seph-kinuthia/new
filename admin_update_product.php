@@ -95,6 +95,10 @@ if(isset($_POST['update_product'])){
       </div>
       <div class="form-item">
          <label for="quantity">quantity of this product available in stock</label>
+         <input readonly type="number" required class="box" value="<?= $fetch_products['quantity']; ?>">
+      </div>
+      <div class="form-item">
+         <label for="quantity">update the quantity of this product available in stock</label>
          <input type="number" name="quantity" placeholder="enter quantity" required class="box" value="<?= $fetch_products['quantity']; ?>">
       </div>
       <div class="form-item">

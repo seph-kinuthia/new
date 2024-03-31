@@ -99,6 +99,7 @@ if(isset($_GET['delete'])){
    </div>
 
    <div class="section__body">
+      <
    </div>
 </section>
 
@@ -123,7 +124,7 @@ if(isset($_GET['delete'])){
          <input type="file" name="image" required class="box" accept="image/jpg, image/jpeg, image/png">
          </div>
          <div class="inputBox">
-            <input type="number" name="quantity" class="box" required placeholder="quantity of this product in stock">
+            <inputr type="number" name="quantity" class="box" required  placeholder="quantity of this product in stock">
          </div>
       </div>
       <textarea name="details" class="box" required placeholder="enter product details" cols="30" rows="10"></textarea>
@@ -133,7 +134,6 @@ if(isset($_GET['delete'])){
 </section>
 
 <section class="show-products">
-
    <h1 class="title">products added</h1>
 
    <div class="box-container">
