@@ -21,6 +21,8 @@ if(isset($_POST['update_product'])){
    $category = filter_var($category, FILTER_SANITIZE_STRING);
    $details = $_POST['details'];
    $details = filter_var($details, FILTER_SANITIZE_STRING);
+   $quantity = $_POST['quantity'];
+   $quantity = filter_var($quantity, FILTER_SANITIZE_STRING);
 
    $image = $_FILES['image']['name'];
    $image = filter_var($image, FILTER_SANITIZE_STRING);
@@ -29,11 +31,8 @@ if(isset($_POST['update_product'])){
    $image_folder = 'uploaded_img/'.$image;
    $old_image = $_POST['old_image'];
 
-   $quantity = $_POST['quantity'];
-   $quantity = filter_var($quantity, FILTER_SANITIZE_STRING);
-
-   $update_product = $conn->prepare("UPDATE `products` SET name = ?, category = ?, details = ?, price = ? WHERE id = ?");
-   $update_product->execute([$name, $category, $details, $price, $pid]);
+   $update_product = $conn->prepare("UPDATE `products` SET name = ?, category = ?, details = ?, price = ?, quantity = ? WHERE id = ?");
+   $update_product->execute([$name, $category, $details, $price, $quantity, $pid]);
 
    $message[] = 'product updated successfully!';
 

@@ -53,8 +53,6 @@ if(isset($_POST['order'])){
       $update_product_quantity_query->execute([$item['quantity'], $item['pid']]);
    }
 
-
-
    if($cart_total == 0){
       $message[] = 'your cart is empty';
    }elseif($order_query->rowCount() > 0){

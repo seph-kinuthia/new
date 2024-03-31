@@ -93,6 +93,15 @@ if(isset($_GET['delete'])){
    
 <?php include 'admin_header.php'; ?>
 
+<section class="update-product">
+   <div class="section__header">
+      <h1>Update Product Stock</h1>
+   </div>
+
+   <div class="section__body">
+   </div>
+</section>
+
 <section class="add-products">
 
    <h1 class="title">add new product</h1>
