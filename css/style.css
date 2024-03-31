@@ -1,7 +1,84 @@
 @import url('components.css');
 
 .form-label {
+   font-weight: 500;
+   font-size: 16px;   
+}
+
+.form-item p {
+   margin-bottom: 2px;
    font-size: 16px;
+}
+
+.form-btn {
+   display: block;
+   font-size: 16px;
+   padding: 8px;
+   margin-top: 4px;
+   border: 1px solid gray;
+}
+
+.product-title {
+   font-size: 20px;
+}
+
+.grid-wrapper {
+   display: block;
+   max-width: 400px;
+   margin: 0 auto;
+}
+.card-wrapper {
+
+   display: grid;
+   grid-template-columns: repeat(3, 1fr);
+   gap: 4px;
+}
+
+.card {
+   display: block;
+   text-align: center;
+   padding: 8px;
+   width: 150px;
+   margin-bottom: 2px;
+   border: 1px solid gray;
+}
+
+.card-header {
+   font-size: 2rem;
+}
+
+.card-price {
+   font-size: 1.75rem;
+}
+
+.card__media-area {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}
+
+.card-img {
+   display: block;
+}
+
+.card__action-area {
+   display: block;
+}
+
+.card-btn {
+   font-size: 10px;
+   text-align: center;
+   text-transform: uppercase;
+   cursor: pointer;
+   display: block;
+   padding: 4px;
+   border: 1px solid gray;
+}
+.cap {
+   font-size: 14px;
+   text-transform: uppercase;
+   letter-spacing: .5px;
+   margin-bottom: 2px;
 }
 
 .home-bg{
@@ -94,7 +171,7 @@
 
 .products .box-container .box{
    padding:2rem;
-   text-align: center;
+   text-align: left;
    border:var(--border);
    background-color: var(--white);
    box-shadow: var(--box-shadow);
@@ -555,7 +632,6 @@
 }
 
 .shopping-cart .box-container .box img{
-   width: 100%;
    margin-bottom: 1rem;
 }
 

@@ -97,10 +97,9 @@ if(isset($_POST['add_to_cart'])){
 
 <section class="products">
 
-   <h1 class="title">products categories</h1>
-
+   <h1 class="title">Shop By Category</h1>
+   
    <div class="box-container">
-
    <?php
       $category_name = $_GET['category'];
       $select_products = $conn->prepare("SELECT * FROM `products` WHERE category = ?");
@@ -109,8 +108,7 @@ if(isset($_POST['add_to_cart'])){
          while($fetch_products = $select_products->fetch(PDO::FETCH_ASSOC)){ 
    ?>
    <form action="" class="box" method="POST">
-      <div class="price">$<span><?= $fetch_products['price']; ?></span>/-</div>
-      <a href="view_page.php?pid=<?= $fetch_products['id']; ?>" class="fas fa-eye"></a>
+      <div class="price">KSH <span><?= $fetch_products['price']; ?></span>/-</div>
       <img src="uploaded_img/<?= $fetch_products['image']; ?>" alt="">
       <div class="name"><?= $fetch_products['name']; ?></div>
       <div class="form-item">
@@ -131,17 +129,8 @@ if(isset($_POST['add_to_cart'])){
          echo '<p class="empty">no products available!</p>';
       }
    ?>
-
    </div>
-
 </section>
-
-
-
-
-
-
-
 <?php include 'footer.php'; ?>
 
 <script src="js/script.js"></script>

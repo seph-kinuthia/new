@@ -98,14 +98,13 @@ if(isset($_POST['add_to_cart'])){
 <section class="p-category">
 
    <a href="category.php?category=fruits">fruits</a>
-   <a href="category.php?category=vegitables">vegitables</a>
+   <a href="category.php?category=vegitables">vegetables</a>
    <a href="category.php?category=fish">fish</a>
    <a href="category.php?category=meat">meat</a>
 
 </section>
 
 <section class="products">
-
    <h1 class="title">latest products</h1>
 
    <div class="box-container">
@@ -116,16 +115,23 @@ if(isset($_POST['add_to_cart'])){
       if($select_products->rowCount() > 0){
          while($fetch_products = $select_products->fetch(PDO::FETCH_ASSOC)){ 
    ?>
-   <form action="" class="box" method="POST">
-      <div class="price">$<span><?= $fetch_products['price']; ?></span>/-</div>
-      <a href="view_page.php?pid=<?= $fetch_products['id']; ?>" class="fas fa-eye"></a>
+   <form id="shopForm" action="" class="box" method="POST">
+      <div class="price">KSH <span><?= $fetch_products['price']; ?></span>/-</div>
       <img src="uploaded_img/<?= $fetch_products['image']; ?>" alt="">
-      <div class="name"><?= $fetch_products['name']; ?></div>
+      <div class="form-item">
+         <label class="product-title"><?= $fetch_products['name']; ?></label>
+      </div>
       <input type="hidden" name="pid" value="<?= $fetch_products['id']; ?>">
       <input type="hidden" name="p_name" value="<?= $fetch_products['name']; ?>">
       <input type="hidden" name="p_price" value="<?= $fetch_products['price']; ?>">
       <input type="hidden" name="p_image" value="<?= $fetch_products['image']; ?>">
-      <input type="number" min="1" value="1" name="p_qty" class="qty">
+      <div class="form-item">
+         <label class="form-label cap" for="quantity">Available in stock : <span><?= $fetch_products['quantity'] ?></span></label>
+      </div>
+      <div class="form-item">
+         <label class="form-label" for="quantity">Quantity</label>
+         <input type="number" min="1" value="1" max=<?= $fetch_products['quantity'] ?> name="p_qty" class="qty">
+      </div>
       <input type="submit" value="add to wishlist" class="option-btn" name="add_to_wishlist">
       <input type="submit" value="add to cart" class="btn" name="add_to_cart">
    </form>
@@ -135,7 +141,16 @@ if(isset($_POST['add_to_cart'])){
       echo '<p class="empty">no products added yet!</p>';
    }
    ?>
+   <!-- js script -->
 
+   <script>
+   forms = document.querySelectorAll("#shopForm");
+   forms.forEach(form => {
+      quant = form.querySelector("#val");
+      nme = form.querySelector(".name");
+      console.log(`quant: ${quant.value} name: ${nme.textContent} ${maxValue}`);
+   });
+   </script>
    </div>
 
 </section>

@@ -45,7 +45,7 @@ body{
 }
 
 html{
-   font-size: 62.5%;
+   font-size: 8px;
    overflow-x: hidden;
    scroll-behavior: smooth;
    scroll-padding-top: 6.5rem;

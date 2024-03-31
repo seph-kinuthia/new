@@ -158,24 +158,32 @@ if(isset($_POST['add_to_cart'])){
       $select_products = $conn->prepare("SELECT * FROM `products` LIMIT 6");
       $select_products->execute();
       if($select_products->rowCount() > 0){
-         while($fetch_products = $select_products->fetch(PDO::FETCH_ASSOC)){ 
+         while($fetch_products = $select_products->fetch(PDO::FETCH_ASSOC))
+         { 
    ?>
    <form action="" class="box" method="POST">
-      <div class="price">$<span><?= $fetch_products['price']; ?></span>/-</div>
+      <div class="price">KSH <span><?= $fetch_products['price']; ?></span>/-</div>
       <a href="view_page.php?pid=<?= $fetch_products['id']; ?>" class="fas fa-eye"></a>
-      <img src="uploaded_img/<?= $fetch_products['image']; ?>" alt="">
-      <div class="name"><?= $fetch_products['name']; ?></div>
       <div class="form-item">
-         <label class="form-label" for="quantity">available in stock</label>
-         <span><?= $fetch_products['quantity'] ?></span>
+         <img src="uploaded_img/<?= $fetch_products['image']; ?>" alt="">
+      </div>
+      <div class="form-item">
+         <div class="name"><?= $fetch_products['name']; ?></div>
+      </div>
+      <div class="form-item">
+         <label class="form-label cap" for="quantity">Available in stock : <span><?= $fetch_products['quantity'] ?></span></label>
       </div>
       <input type="hidden" name="pid" value="<?= $fetch_products['id']; ?>">
       <input type="hidden" name="p_name" value="<?= $fetch_products['name']; ?>">
       <input type="hidden" name="p_price" value="<?= $fetch_products['price']; ?>">
       <input type="hidden" name="p_image" value="<?= $fetch_products['image']; ?>">
-      <input type="number" min="1" value="1" max=<?= $fetch_products['quantity'] ?> name="p_qty" class="qty">
-      <input type="submit" value="add to wishlist" class="option-btn" name="add_to_wishlist">
-      <input type="submit" value="add to cart" class="btn" name="add_to_cart">
+      <div class="form-item">
+         <label class="form-label" for="quantity">Quantity</label>
+         <input type="number" min="1" value="1" max=<?= $fetch_products['quantity'] ?> name="p_qty" class="qty">
+      </div>
+      <div class="form-item">
+         <input type="submit" value="buy" class="btn" name="add_to_cart">
+      </div>
    </form>
    <?php
       }
@@ -183,7 +191,6 @@ if(isset($_POST['add_to_cart'])){
       echo '<p class="empty">no products added yet!</p>';
    }
    ?>
-
    </div>
 
 </section>

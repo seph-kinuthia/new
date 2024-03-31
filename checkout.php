@@ -27,8 +27,9 @@ if(isset($_POST['order'])){
    $cart_total = 0;
    $cart_products[] = '';
 
-   $cart_query = $conn->prepare("SELECT * FROM `cart` WHERE user_id = ?");
+   $cart_query = $conn->prepare("SELECT * FROM `cart` WHERE user_id = ? ");
    $cart_query->execute([$user_id]);
+
    if($cart_query->rowCount() > 0){
       while($cart_item = $cart_query->fetch(PDO::FETCH_ASSOC)){
          $cart_products[] = $cart_item['name'].' ( '.$cart_item['quantity'].' )';
@@ -42,6 +43,18 @@ if(isset($_POST['order'])){
    $order_query = $conn->prepare("SELECT * FROM `orders` WHERE name = ? AND number = ? AND email = ? AND method = ? AND address = ? AND total_products = ? AND total_price = ?");
    $order_query->execute([$name, $number, $email, $method, $address, $total_products, $cart_total]);
 
+   // get pid and quantity from cart
+   $items_ordered = $conn->prepare("SELECT * from `cart` WHERE user_id = ? ");
+   $items_ordered->execute([$user_id]);
+
+   foreach($items_ordered as $item)
+   {
+      $update_product_quantity_query = $conn->prepare("UPDATE `products` SET quantity = quantity - ? where id = ? ");
+      $update_product_quantity_query->execute([$item['quantity'], $item['pid']]);
+   }
+
+
+
    if($cart_total == 0){
       $message[] = 'your cart is empty';
    }elseif($order_query->rowCount() > 0){
@@ -49,6 +62,7 @@ if(isset($_POST['order'])){
    }else{
       $insert_order = $conn->prepare("INSERT INTO `orders`(user_id, name, number, email, method, address, total_products, total_price, placed_on) VALUES(?,?,?,?,?,?,?,?,?)");
       $insert_order->execute([$user_id, $name, $number, $email, $method, $address, $total_products, $cart_total, $placed_on]);
+      
       $delete_cart = $conn->prepare("DELETE FROM `cart` WHERE user_id = ?");
       $delete_cart->execute([$user_id]);
       $message[] = 'order placed successfully!';
@@ -88,14 +102,14 @@ if(isset($_POST['order'])){
             $cart_total_price = ($fetch_cart_items['price'] * $fetch_cart_items['quantity']);
             $cart_grand_total += $cart_total_price;
    ?>
-   <p> <?= $fetch_cart_items['name']; ?> <span>(<?= '$'.$fetch_cart_items['price'].'/- x '. $fetch_cart_items['quantity']; ?>)</span> </p>
+   <p> <?= $fetch_cart_items['name']; ?> <span>(<?= 'KSH '.$fetch_cart_items['price'].'/- x '. $fetch_cart_items['quantity']; ?>)</span> </p>
    <?php
     }
    }else{
       echo '<p class="empty">your cart is empty!</p>';
    }
    ?>
-   <div class="grand-total">grand total : <span>$<?= $cart_grand_total; ?>/-</span></div>
+   <div class="grand-total">grand total : <span>KSH<?= $cart_grand_total; ?>/-</span></div>
 </section>
 
 <section class="checkout-orders">
@@ -157,13 +171,6 @@ if(isset($_POST['order'])){
    </form>
 
 </section>
-
-
-
-
-
-
-
 
 <?php include 'footer.php'; ?>
 
